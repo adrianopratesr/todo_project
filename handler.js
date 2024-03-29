@@ -10,6 +10,14 @@ const createListItem = (taskName) => {
     const list = document.getElementById("taskList");
     listItemHTML.textContent = taskName;
     list.appendChild(listItemHTML);
+
+    const checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    listItemHTML.appendChild(checkBox);
+    
+    const trash = document.createElement("button");
+    trash.textContent = "Apagar";
+    listItemHTML.appendChild(trash);
 }
 
 export const renderList = () => {
