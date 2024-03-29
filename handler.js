@@ -5,19 +5,22 @@ export const createTask = (taskName) => {
     createListItem(taskName);
 }
 
+const createListIcons = (listItemHTML) => {
+    const checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    listItemHTML.appendChild(checkBox);
+
+    const trash = document.createElement("button");
+    trash.textContent = "Apagar";
+    listItemHTML.appendChild(trash);
+};
+
 const createListItem = (taskName) => {
     const listItemHTML = document.createElement("li");
     const list = document.getElementById("taskList");
     listItemHTML.textContent = taskName;
     list.appendChild(listItemHTML);
-
-    const checkBox = document.createElement("input");
-    checkBox.setAttribute("type", "checkbox");
-    listItemHTML.appendChild(checkBox);
-    
-    const trash = document.createElement("button");
-    trash.textContent = "Apagar";
-    listItemHTML.appendChild(trash);
+    createListIcons(listItemHTML);
 }
 
 export const renderList = () => {
