@@ -6,13 +6,15 @@ export const createTask = (taskName) => {
 }
 
 const createListIcons = (listItemHTML) => {
-    const checkBox = document.createElement("input");
-    checkBox.setAttribute("type", "checkbox");
-    listItemHTML.appendChild(checkBox);
+    const checkBoxHTML = document.createElement("input");
+    checkBoxHTML.setAttribute("type", "checkbox");
+    listItemHTML.appendChild(checkBoxHTML);
 
-    const trash = document.createElement("button");
-    trash.textContent = "Apagar";
-    listItemHTML.appendChild(trash);
+    const trashIconHTML = document.createElement("input");
+    trashIconHTML.setAttribute("type", "image");
+    trashIconHTML.setAttribute("class", "icons-task-list")
+    trashIconHTML.setAttribute("src", "trash-can.png");
+    listItemHTML.appendChild(trashIconHTML);
 };
 
 const createListItem = (taskName) => {
