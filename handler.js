@@ -1,3 +1,4 @@
+import { listItemGenerator } from "./element_handler.js";
 import { showErrorMessage } from "./error_handler.js";
 import { addToArrayInLocalStorage, getFromLocalStorage } from "./repository.js";
 
@@ -10,24 +11,14 @@ export const createTask = (taskName) => {
   createListItem(taskName);
 };
 
-const createListIcons = (listItemHTML) => {
-  const checkBoxHTML = document.createElement("input");
-  checkBoxHTML.setAttribute("type", "checkbox");
-  listItemHTML.appendChild(checkBoxHTML);
 
-  const trashIconHTML = document.createElement("input");
-  trashIconHTML.setAttribute("type", "image");
-  trashIconHTML.setAttribute("class", "icons-task-list");
-  trashIconHTML.setAttribute("src", "trash-can.png");
-  listItemHTML.appendChild(trashIconHTML);
-};
 
 const createListItem = (taskName) => {
-  const listItemHTML = document.createElement("li");
   const listHTML = document.getElementById("taskList");
+  const listItemHTML = listItemGenerator();
+
   listItemHTML.textContent = taskName;
   listHTML.appendChild(listItemHTML);
-  createListIcons(listItemHTML);
 };
 
 export const renderList = () => {
