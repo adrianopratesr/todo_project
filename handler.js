@@ -15,8 +15,9 @@ export const createTask = (taskName) => {
 
 const createListItem = (taskName) => {
   const listHTML = document.getElementById("taskList");
+  const listItems = listItemGenerator(taskName);
 
-  listItemGenerator(listHTML, taskName);
+  listHTML.appendChild(listItems)
 };
 
 export const renderList = () => {

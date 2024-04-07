@@ -1,10 +1,8 @@
-export const listItemGenerator = (listHTML, liTextContent) => {
+export const listItemGenerator = (liTextContent) => {
   const listItemHTML = document.createElement("li");
   listItemHTML.textContent = liTextContent;
 
   appendElementsToListItem(listItemHTML);
-
-  listHTML.appendChild(listItemHTML);
 
   return listItemHTML;
 };
