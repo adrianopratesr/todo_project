@@ -16,3 +16,7 @@ export const getFromLocalStorage = () => {
     const getLocalStorage = localStorage.getItem(key);
     return JSON.parse(getLocalStorage);
 }
+
+export const getNewId = () => {
+    return localStorage.length +1
+}
