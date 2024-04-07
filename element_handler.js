@@ -1,5 +1,3 @@
-import { removeListItem } from "./handler.js";
-
 export const listItemGenerator = (liTextContent) => {
   const listItemHTML = document.createElement("li");
   listItemHTML.textContent = liTextContent;
