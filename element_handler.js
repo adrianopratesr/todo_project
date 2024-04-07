@@ -1,6 +1,10 @@
-export const listItemGenerator = () => {
+export const listItemGenerator = (listHTML, liTextContent) => {
   const listItemHTML = document.createElement("li");
+  listItemHTML.textContent = liTextContent;
+
   appendElementsToListItem(listItemHTML);
+
+  listHTML.appendChild(listItemHTML);
 
   return listItemHTML;
 };
@@ -21,19 +25,19 @@ const listItemElements = [
 ];
 
 const appendElementsToListItem = (listItemHTML) => {
-  listItemElements.forEach((element) => {
-    if (element.tagHTML) {
-      const elementHTML = document.createElement(element.tagHTML);
+  if (listItemHTML && listItemElements.length > 0) {
+    listItemElements.forEach((element) => {
+      if (element.tagHTML) {
+        const elementHTML = document.createElement(element.tagHTML);
 
-      for (const key in element) {
-        if (element.hasOwnProperty(key) && key !== element.tagHTML) {
-          elementHTML.setAttribute(key, element[key]);
+        for (const key in element) {
+          if (element.hasOwnProperty(key) && key !== "tagHTML") {
+            elementHTML.setAttribute(key, element[key]);
+          }
         }
-      }
 
-      listItemHTML.appendChild(elementHTML);
-    } else {
-      return;
-    }
-  });
+        listItemHTML.appendChild(elementHTML);
+      }
+    });
+  }
 };
