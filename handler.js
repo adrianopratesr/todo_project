@@ -11,13 +11,11 @@ export const createTask = (taskName) => {
   createListItem(taskName);
 };
 
-
-
 const createListItem = (taskName) => {
   const listHTML = document.getElementById("taskList");
   const listItems = listItemGenerator(taskName);
 
-  listHTML.appendChild(listItems)
+  listHTML.appendChild(listItems);
 };
 
 export const renderList = () => {
