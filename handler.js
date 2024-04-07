@@ -7,15 +7,16 @@ const ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY = "Task name could not be empty";
 export const createTask = (taskName) => {
   if (!taskName) return showErrorMessage(ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY);
 
-  addToArrayInLocalStorage(taskName);
-  createListItem(taskName);
+  const taskId = addToArrayInLocalStorage(taskName);
+  createListItem(taskId, taskName);
 };
 
-const createListItem = (taskName) => {
+const createListItem = (taskId, taskName) => {
   const listHTML = document.getElementById("taskList");
-  const listItems = listItemGenerator(taskName);
+  const listItem = listItemGenerator(taskName);
+  listItem.setAttribute("id", taskId);
 
-  listHTML.appendChild(listItems);
+  listHTML.appendChild(listItem);
 };
 
 export const renderList = () => {
@@ -23,6 +24,6 @@ export const renderList = () => {
   if (!listItens) return;
 
   listItens.forEach((item) => {
-    createListItem(item);
+    createListItem(item.id, item.name);
   });
 };

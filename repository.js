@@ -11,7 +11,7 @@ export const addToArrayInLocalStorage = (value) => {
 
     currentValue.push(newItem);
     insertTaskToLocalStorage(currentValue);
-    return currentValue;
+    return newItem.id;
 }
 
 const insertTaskToLocalStorage = (value) => {
@@ -23,6 +23,6 @@ export const getFromLocalStorage = () => {
     return JSON.parse(getLocalStorage);
 }
 
-export const getNewId = () => {
+const getNewId = () => {
     return localStorage.length +1
 }
