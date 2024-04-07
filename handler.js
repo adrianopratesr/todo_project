@@ -24,9 +24,9 @@ const createListIcons = (listItemHTML) => {
 
 const createListItem = (taskName) => {
   const listItemHTML = document.createElement("li");
-  const list = document.getElementById("taskList");
+  const listHTML = document.getElementById("taskList");
   listItemHTML.textContent = taskName;
-  list.appendChild(listItemHTML);
+  listHTML.appendChild(listItemHTML);
   createListIcons(listItemHTML);
 };
 
