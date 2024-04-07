@@ -3,13 +3,19 @@ const key = "task";
 export const addToArrayInLocalStorage = (value) => {
     const readLocalStorage = getFromLocalStorage();
     const currentValue = readLocalStorage ? readLocalStorage : [];
-    currentValue.push(value);
-    insertTaskToLocalStorage(JSON.stringify(currentValue));
+
+    const newItem = {
+        id:getNewId(),
+        name: value
+    };
+
+    currentValue.push(newItem);
+    insertTaskToLocalStorage(currentValue);
     return currentValue;
 }
 
 const insertTaskToLocalStorage = (value) => {
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, JSON.stringify(value));
 }
 
 export const getFromLocalStorage = () => {
