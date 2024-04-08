@@ -1,6 +1,11 @@
 import { listItemGenerator } from "./element_handler.js";
 import { showErrorMessage } from "./error_handler.js";
-import { addToArrayInLocalStorage, getFromLocalStorage } from "./repository.js";
+import {
+  addToArrayInLocalStorage,
+  getFromLocalStorage,
+  getItemById,
+  removeFromLocalStorage,
+} from "./repository.js";
 
 const ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY = "Task name could not be empty";
 
@@ -26,4 +31,27 @@ export const renderList = () => {
   listItens.forEach((item) => {
     createListItem(item.id, item.name);
   });
+};
+
+export const renderListItemEvents = () => {
+  const itemsToAddEvent = getFromLocalStorage();
+
+  if (itemsToAddEvent) {
+    itemsToAddEvent.forEach((item) => {
+      const elementHTML = document.getElementById(item.id);
+      elementHTML.addEventListener("click", () => {
+        removeListItemEvent(item.id);
+      });
+    });
+  }
+};
+
+const removeListItemEvent = (itemId) => {
+  const item = getItemById(itemId);
+
+  if (item) {
+    removeFromLocalStorage(item.id);
+  } else {
+    showErrorMessage("Item not found.");
+  }
 };

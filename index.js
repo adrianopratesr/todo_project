@@ -1,4 +1,4 @@
-import { createTask, renderList } from "./handler.js";
+import { createTask, renderListItemEvents, renderList } from "./handler.js";
 
 const input = document.getElementById("taskName");
 const button = document.getElementById("newTaskButton");
@@ -11,6 +11,7 @@ const PageEventsListener = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderList();
+  renderListItemEvents();
 });
 
 PageEventsListener();
