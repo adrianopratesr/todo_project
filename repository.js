@@ -33,6 +33,7 @@ export const removeFromLocalStorage = (id) => {
     ls.splice(indexItem, 1);
   }
 
+  console.log(ls)
   insertToLocalStorage(ls);
 };
 
@@ -43,5 +44,6 @@ export const getItemById = (id) => {
 };
 
 const getNewId = () => {
-  return localStorage.length + 1;
+    const data = getFromLocalStorage();
+  return data.length + 1;
 };

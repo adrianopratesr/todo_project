@@ -8,11 +8,13 @@ import {
 } from "./repository.js";
 
 const ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY = "Task name could not be empty";
+const NOT_FOUND_MESSAGE = "Item not found.";
 
 export const createTask = (taskName) => {
   if (!taskName) return showErrorMessage(ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY);
 
   const taskId = addToArrayInLocalStorage(taskName);
+
   createListItem(taskId, taskName);
 };
 
@@ -52,6 +54,8 @@ const removeListItemEvent = (itemId) => {
   if (item) {
     removeFromLocalStorage(item.id);
   } else {
-    showErrorMessage("Item not found.");
+    showErrorMessage(NOT_FOUND_MESSAGE);
   }
+
+  location.reload();
 };
