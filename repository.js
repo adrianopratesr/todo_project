@@ -33,7 +33,6 @@ export const removeFromLocalStorage = (id) => {
     ls.splice(indexItem, 1);
   }
 
-  console.log(ls)
   insertToLocalStorage(ls);
 };
 
