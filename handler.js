@@ -1,5 +1,6 @@
 import { listItemGenerator } from "./element_handler.js";
-import { showErrorMessage } from "./error_handler.js";
+import { showAlert } from "./alert_handler.js";
+import { inputTaskHTML } from "./index.js";
 import {
   addToArrayInLocalStorage,
   getFromLocalStorage,
@@ -9,13 +10,16 @@ import {
 
 const ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY = "Task name could not be empty";
 const NOT_FOUND_MESSAGE = "Item not found.";
+const SUCCESS_CREATE_TASK_MESSAGE = "Task has been created."
 
 export const createTask = (taskName) => {
-  if (!taskName) return showErrorMessage(ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY);
+  if (!taskName) return showAlert(ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY);
 
   const taskId = addToArrayInLocalStorage(taskName);
 
   createListItem(taskId, taskName);
+  showAlert(SUCCESS_CREATE_TASK_MESSAGE);
+  refreshInputTaskName();
 };
 
 const createListItem = (taskId, taskName) => {
@@ -54,8 +58,14 @@ const removeListItemEvent = (itemId) => {
   if (item) {
     removeFromLocalStorage(item.id);
   } else {
-    showErrorMessage(NOT_FOUND_MESSAGE);
+    showAlert(NOT_FOUND_MESSAGE);
   }
 
   location.reload();
 };
+
+const refreshInputTaskName = () => {
+  inputTaskHTML.textContent = "";
+
+  location.reload();
+}
