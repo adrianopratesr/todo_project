@@ -7,7 +7,7 @@ export const addToArrayInLocalStorage = (value) => {
   const newItem = {
     id: getNewId(),
     name: value,
-    status: false
+    status: false,
   };
 
   currentValue.push(newItem);
@@ -44,6 +44,20 @@ export const getItemById = (id) => {
 };
 
 const getNewId = () => {
-    const data = getFromLocalStorage();
+  const data = getFromLocalStorage();
   return data ? data.length + 1 : 1;
+};
+
+export const updateFromLocalStorage = (id) => {
+  const ls = getFromLocalStorage();
+
+  localStorage.removeItem(key);
+  const updateLs = ls.map((item) => {
+    if (item.id === id) {
+      return { ...item, status: item.status === true ? false : true };
+    }
+    return item;
+  });
+
+  insertToLocalStorage(updateLs);
 };
