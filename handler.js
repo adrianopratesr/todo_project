@@ -6,11 +6,12 @@ import {
   getFromLocalStorage,
   getItemById,
   removeFromLocalStorage,
+  updateFromLocalStorage,
 } from "./repository.js";
 
 const ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY = "Task name could not be empty";
 const NOT_FOUND_MESSAGE = "Item not found.";
-const SUCCESS_CREATE_TASK_MESSAGE = "Task has been created."
+const SUCCESS_CREATE_TASK_MESSAGE = "Task has been created.";
 
 export const createTask = (taskName) => {
   if (!taskName) return showAlert(ERROR_MESSAGE_WHEN_TASK_NAME_IS_EMPTY);
@@ -22,9 +23,9 @@ export const createTask = (taskName) => {
   refreshInputTaskName();
 };
 
-const createListItem = (taskId, taskName) => {
+const createListItem = (taskId, taskName, taskStatus = false) => {
   const listHTML = document.getElementById("taskList");
-  const listItem = listItemGenerator(taskName);
+  const listItem = listItemGenerator(taskName, taskStatus);
   listItem.setAttribute("id", taskId);
 
   listHTML.appendChild(listItem);
@@ -35,7 +36,7 @@ export const renderList = () => {
   if (!listItens) return;
 
   listItens.forEach((item) => {
-    createListItem(item.id, item.name);
+    createListItem(item.id, item.name, item.status);
   });
 };
 
@@ -45,8 +46,20 @@ export const renderListItemEvents = () => {
   if (itemsToAddEvent) {
     itemsToAddEvent.forEach((item) => {
       const elementHTML = document.getElementById(item.id);
-      elementHTML.addEventListener("click", () => {
-        removeListItemEvent(item.id);
+
+      elementHTML.addEventListener("click", (event) => {
+        const target = event.target.id;
+
+        switch (target) {
+          case "trashIcon":
+            removeListItemEvent(item.id);
+            break;
+          case "doneIcon":
+            updateListItemEvent(item.id);
+            break;
+          default:
+            break;
+        }
       });
     });
   }
@@ -68,4 +81,16 @@ const refreshInputTaskName = () => {
   inputTaskHTML.textContent = "";
 
   location.reload();
-}
+};
+
+const updateListItemEvent = (itemId) => {
+  const item = getItemById(itemId);
+
+  if (item) {
+    updateFromLocalStorage(item.id);
+  } else {
+    showAlert(NOT_FOUND_MESSAGE);
+  }
+
+  location.reload();
+};

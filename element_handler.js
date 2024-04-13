@@ -1,8 +1,8 @@
-export const listItemGenerator = (liTextContent) => {
+export const listItemGenerator = (liTextContent, liCheckboxStatus) => {
   const listItemHTML = document.createElement("li");
   listItemHTML.textContent = liTextContent;
 
-  appendElementsToListItem(listItemHTML);
+  appendElementsToListItem(listItemHTML, liCheckboxStatus);
 
   return listItemHTML;
 };
@@ -22,7 +22,7 @@ const listItemElements = [
   },
 ];
 
-const appendElementsToListItem = (listItemHTML) => {
+const appendElementsToListItem = (listItemHTML, liCheckboxStatus) => {
   if (listItemHTML && listItemElements.length > 0) {
     listItemElements.forEach((element) => {
       if (element.tagHTML) {
@@ -31,9 +31,12 @@ const appendElementsToListItem = (listItemHTML) => {
         for (const key in element) {
           if (element.hasOwnProperty(key) && key !== "tagHTML") {
             elementHTML.setAttribute(key, element[key]);
+
+            if (element[key] === "checkbox") {
+              elementHTML.checked = liCheckboxStatus;
+            }
           }
         }
-
         listItemHTML.appendChild(elementHTML);
       }
     });
