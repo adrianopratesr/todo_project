@@ -5,7 +5,7 @@ const button = document.getElementById("newTaskButton");
 
 const PageEventsListener = () => {
   button.addEventListener("click", () => {
-    createTask(inputTaskHTML.value);
+    createItem(inputTaskHTML.value);
     renderListItemEvents();
   });
 };
